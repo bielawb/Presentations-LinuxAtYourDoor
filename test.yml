@@ -1,8 +1,0 @@
----
-- name: Update something in DNS
-  hosts: all
-  gather_facts: no
-  tasks:
-     - name: Run a some command
-       win_shell: adda {{ name }} {{ ip }}
-
