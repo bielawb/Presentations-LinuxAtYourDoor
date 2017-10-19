@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo tcpdump -l -A -c 10 dst 192.168.7.211 and tcp port 5985 2> /dev/null | grep -o -P '[^>]*?(?=\</rsp:Stream)' | base64 -d
