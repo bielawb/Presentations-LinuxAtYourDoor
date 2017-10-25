@@ -4,7 +4,7 @@
 DEMO_PROMPT="${GREEN}➜ ${CYAN}[\t] ${RED}⌘  > "
 TYPE_SPEED=50
 clear
-cd ~/PSConfAsia-Demo/Scripts
+cd ~/PSConfAsia/Scripts
 p "${GREEN}# Before we can use ansible - we need to install it."
 pe 'sudo yum -y install ansible'
 p "${GREEN}# At the very base there is inventory - we need to make it windows-aware..."

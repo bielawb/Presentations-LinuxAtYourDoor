@@ -4,7 +4,7 @@
 DEMO_PROMPT="${GREEN}➜ ${CYAN}[\t] ${RED}⌘  > "
 TYPE_SPEED=50
 clear
-cd ~/PSConfAsia-Demo/Scripts
+cd ~/PSConfAsia/Scripts
 p "${GREEN}# Using SSL - we have to change endpoint"
 pe 'cat bin/withSsl.py'
 p "${GREEN}# The problem: CA is not easy to configure... "

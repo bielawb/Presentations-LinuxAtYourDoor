@@ -3,7 +3,7 @@
 DEMO_PROMPT="${GREEN}➜ ${CYAN}[\t] ${RED}⌘  > "
 TYPE_SPEED=50
 clear
-cd ~/PSConfAsia-Demo/Scripts
+cd ~/PSConfAsia/Scripts
 p "${GREEN}# Let's take a look at basic scripts first"
 pe 'cat simpleWinRM.py'
 p "${GREEN}# But before we run it - we will need to run kinit"

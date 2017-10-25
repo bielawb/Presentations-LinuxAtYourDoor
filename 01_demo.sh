@@ -11,4 +11,4 @@ pe 'sudo yum -y install pip gcc krb5-devel krb5-workstation python-devel'
 p "${GREEN}# Time to install pywinrm!"
 pe 'sudo pip install pywinrm[kerberos]'
 p "${GREEN}# Our scripts - time to see them!"
-code /home/bielawb/PSConfAsia-Demo/Scripts
+code /home/bielawb/PSConfAsia/Scripts
