@@ -41,3 +41,19 @@ function Start-AwxJob {
 Start-AwxJob -TemplateName windows.demo -Parameters @{ title = 'This is a title...' }
 
 #endregion
+
+#region delegation
+$ansibleUser = Get-Credential ansibleUser
+Start-AwxJob -TemplateName 'Add DNS entries' -Parameters @{ 
+    IP = '192.168.7.179'
+    hostName = 'foofoo'
+    cname = 'cnameToFooFoo' 
+} -Credential $ansibleUser
+
+Resolve-DnsName -Name cnameToFooFoo.monad.net
+
+Start-AwxJob -TemplateName 'Remove DNS entries' -Parameters @{ 
+    IP = '192.168.7.179'
+    hostName = 'foofoo'
+    cname = 'cnameToFooFoo' 
+} -Credential $ansibleUser
