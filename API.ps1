@@ -44,16 +44,27 @@ Start-AwxJob -TemplateName windows.demo -Parameters @{ title = 'This is a title.
 
 #region delegation
 $ansibleUser = Get-Credential ansibleUser
-Start-AwxJob -TemplateName 'Add DNS entries' -Parameters @{ 
+$dnsParameters = @{
     IP = '192.168.7.179'
     hostName = 'foofoo'
     cname = 'cnameToFooFoo' 
-} -Credential $ansibleUser
+}
+
+Start-AwxJob -TemplateName 'Add DNS entries' -Parameters $dnsParameters -Credential $ansibleUser
 
 Resolve-DnsName -Name cnameToFooFoo.monad.net
 
-Start-AwxJob -TemplateName 'Remove DNS entries' -Parameters @{ 
-    IP = '192.168.7.179'
-    hostName = 'foofoo'
-    cname = 'cnameToFooFoo' 
-} -Credential $ansibleUser
+Start-AwxJob -TemplateName 'Remove DNS entries' -Parameters $dnsParameters -Credential $ansibleUser -OutVariable job
+$statusUri = 'http://awx.monad.net/api/v2/jobs/{0}/' -f $job.id
+do {
+    $result = try {
+        Invoke-RestMethod -Credential $ansibleUser -Uri $statusUri -ErrorAction Stop
+    } catch {
+        Write-Warning "Error - $_"
+    }
+    Start-Sleep -Milliseconds 100
+} until ($result.finished)
+
+$result | Format-Table status, elapsed
+
+#endregion
